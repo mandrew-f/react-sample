@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - '*'
+
+jobs:
+  testing:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Linter
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test
